@@ -15,12 +15,15 @@ pragma solidity 0.8.18;
 */
 
 contract MyToken {
+    //public Variable Here
     string public name;
     string public symbol;
     uint256 public totalSupply;
     address public owner;
 
+    //Mapping Variable here
     mapping(address => uint256) public balances;
+
 
     constructor(string memory _name, string memory _symbol, uint256 _initialSupply) {
         name = _name;
@@ -29,7 +32,7 @@ contract MyToken {
         owner = msg.sender;
         balances[msg.sender] = totalSupply; // Assign the initial supply to the contract creator
     }
-
+    // Mint Function
     function mint(address recipient, uint256 value) public {
         require(msg.sender == owner, "Only the owner can mint tokens");
         require(value > 0, "Mint value must be greater than 0");
@@ -37,7 +40,7 @@ contract MyToken {
         totalSupply += value;
         balances[recipient] += value;
     }
-
+    // Burn Function
     function burn(address target, uint256 value) public {
         require(msg.sender == owner, "Only the owner can burn tokens");
         require(balances[target] >= value, "Insufficient balance to burn");
@@ -47,3 +50,5 @@ contract MyToken {
     }
 }
  // Coded By Rhuzz
+
+ 
